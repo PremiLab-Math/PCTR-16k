@@ -72,9 +72,41 @@ Each JSON entry contains:
 
 ---
 
-**download link**
+**Download link**
 
 Upon acceptance of the manuscript, we will release the subsequent datasets.
+
+## **TSU Prompt Templates**
+
+For each of the seven TSU tasks, we designed a diverse set of specific prompt templates to guide the model and ensure robustness to different instruction phrasings. For each task, we created between 15-22 distinct input prompt templates and multiple output templates to encourage semantic diversity. Below are representative examples of input prompts and expected outputs for each task. The complete collection of prompt templates for all TSU tasks is in [tabrec_instruction.py](tabrec_instruction.py)
+
+* **Table Size Detection (TSD):**
+    * *Input:* "How many rows and columns does this table have? Output the final answer in the JSON format `{"row_number": "m", "column_number": "n"}`."
+    * *Output:* "This table has 5 rows and 4 columns. Thus, the final answer is `{"row_number": "5", "column_number": "4"}`."
+
+* **Table Cell Extraction (TCE):**
+    * *Input:* "What is the content of the cell located in row 2 and column 3 of this table? Represent the cell value in the JSON format `{"row_id":"m", "column_id":"n", "cell_value":"<Corresponding Cell Value>"}`."
+    * *Output:* "The target cell values are as follows: `{"row_id":"2", "column_id":"3", "cell_value":"Example Value"}`."
+
+* **Table Cell Locating (TCL):**
+    * *Input:* "Given a table image and a cell text 'Target Text'. Find the location of this cell and represent it as JSON `{"value": "<cell value>", "location": (row_id, column_id)}` with both row and column indices starting from 1. Denote the location as 'DOES NOT EXIST' if a cell is not present in the table."
+    * *Output:* "The location of the cell is `{"value": "Target Text", "location": (2, 4)}`."
+
+* **Row/Column Extraction (RCE):**
+    * *Input:* "What are the contents of cells located in row 3 of this table? Represent the cells in a row with the JSON format `{"row_id":"<row index>", "cell_list":"<a list of cells in this row>"}`."
+    * *Output:* "The cells in row 3: `{"row_id": "3", "cell_list": ["A", "B", "C", "D"]}`"
+
+* **Merged Cell Detection (MCD):**
+    * *Input:* "Given a table image, please tell me which table cells are merged cells. Return the merged cell regions in the JSON format of `{"top-left":(x, y), "bottom-right":(m, n)}`, where (x, y) and (m, n) represent the (row_id, column_id) coordinates of top-left cell and bottom-right cell, respectively. The row_id and column_id are numbered from 1."
+    * *Output:* "`[{"top-left":(1, 1), "bottom-right":(1, 3)}, {"top-left":(2, 4), "bottom-right":(3, 4)}]`"
+
+* **Same Row/Column (SRC):**
+    * *Input:* "Check if the cells containing 'Value1' and 'Value2' are in the same row or column in this table."
+    * *Output:* "The cells containing 'Value1' and 'Value2' are in the same row or column."
+
+* **Table Recognition (TR):**
+    * *Input:* "This picture illustrates a table. Please represent this table with the markdown format in text."
+    * *Output:* "`| Header1 | Header2 | Header3 | \n | --- | --- | --- | \n | Cell1,1 | Cell1,2 | Cell1,3 | \n | Cell2,1 | Cell2,2 | Cell2,3 |`"
 
 
 
