@@ -74,8 +74,7 @@ Each JSON entry contains:
 
 **Download link**
 
-Baidu Netdisk: https://pan.baidu.com/s/1_3vMrReD9kUYjn4IYQeNhA?pwd=PCTR 提取码: PCTR 
---来自百度网盘超级会员v8的分享
+Baidu Netdisk: https://pan.baidu.com/s/1_3vMrReD9kUYjn4IYQeNhA?pwd=PCTR
 
 ## **TSU Prompt Templates**
 
